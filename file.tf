@@ -22,13 +22,23 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main-vpc.id
 }
 
-resource "aws_subnet" "main-subnet" {
-  vpc_id                  = aws_vpc.main-vpc.id
-  cidr_block              = "10.0.1.0/24"
+resource "aws_subnet" "main-public-subnet" {
+  vpc_id     = aws_vpc.main-vpc.id
+  cidr_block = "10.0.1.0/24"
+
   map_public_ip_on_launch = true
 
   tags = {
     Name = "Public Subnet"
+  }
+}
+
+resource "aws_subnet" "main-private-subnet" {
+  vpc_id     = aws_vpc.main-vpc.id
+  cidr_block = "10.0.0.0/24"
+
+  tags = {
+    Name = "Private Subnet"
   }
 }
 
@@ -83,11 +93,11 @@ resource "aws_security_group" "allow-http-in-sg" {
 
 
 
-resource "aws_instance" "web-ec2" {
+resource "aws_instance" "public-web-ec2" {
   ami                         = "ami-08b5b3a93ed654d19"
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.allow-http-in-sg.id]
-  subnet_id                   = aws_subnet.main-subnet.id
+  subnet_id                   = aws_subnet.main-public-subnet.id
   associate_public_ip_address = true
   user_data                   = <<-EOF
     #!/bin/bash
@@ -98,6 +108,27 @@ resource "aws_instance" "web-ec2" {
     EOF
 
   tags = {
-    Name = "web-ec2"
+    Name = "public-web-ec2"
+  }
+}
+
+resource "aws_instance" "private-ec2" {
+  ami                         = "ami-08b5b3a93ed654d19"
+  instance_type               = "t2.micro"
+  vpc_security_group_ids      = [aws_security_group.allow-http-in-sg.id]
+  subnet_id                   = aws_subnet.main-private-subnet.id
+  associate_public_ip_address = true
+  source_dest_check           = true
+
+  tags = {
+    Name = "private-ec2"
+  }
+}
+
+
+data "aws_nat_gateway" "web-nat-gatewat" {
+  subnet_id = aws_subnet.main-public-subnet.id
+  tags = {
+    Name = "web nat gateway"
   }
 }
