@@ -1,7 +1,7 @@
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+resource "aws_vpc" "main-vpc" {
+  cidr_block = var.vpc-cidr
 
   tags = {
-    Name = "main"
+    Name = "main-vpc"
   }
 }
