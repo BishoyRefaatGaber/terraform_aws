@@ -1,6 +1,6 @@
 # AWS Infrastructure Automation with Terraform
 
-A Terraform project that provisions a secure, multi-tier AWS environment with public/private subnets, load balancers, and automated provisioning. Designed to fulfill the requirements of **Lab3.pdf**.
+A Terraform project that provisions a secure, multi-tier AWS environment with public/private subnets, load balancers, and automated provisioning.
 
 ---
 
