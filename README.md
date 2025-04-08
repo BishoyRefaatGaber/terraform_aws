@@ -48,7 +48,7 @@ This project automates the deployment of a scalable AWS infrastructure that incl
 ## 🛠️ Prerequisites
 - **Terraform v1.0+** installed.
 - **AWS CLI** configured with valid IAM credentials.
-- IAM permissions for **EC2, VPC, S3, and ALB**.
+- IAM permissions for **EC2, VPC, S3, and NLB**.
 
 ---
 
