@@ -8,7 +8,7 @@ A Terraform project that provisions a secure, multi-tier AWS environment with pu
 
 This project automates the deployment of a scalable AWS infrastructure that includes:
 - **Isolated Environments**: Public and private subnets for enhanced security.
-- **Load Balancing**: A public-facing Application Load Balancer (ALB) and a private internal ALB.
+- **Load Balancing**: A public-facing Application Load Balancer (NLB) and a private internal NLB.
 - **Auto-Provisioned Services**: Apache/web server installed automatically on EC2 instances.
 - **State Management**: Remote Terraform state storage in an S3 bucket.
 - **IP Tracking**: Exports instance public IPs to `all-ips.txt` for easy access.
@@ -20,11 +20,11 @@ This project automates the deployment of a scalable AWS infrastructure that incl
 | Requirement                                | Implementation Details                                                                 |
 |--------------------------------------------|---------------------------------------------------------------------------------------|
 | **Workspace Management**                   | Uses a dedicated `dev` workspace (not default).                                       |
-| **Custom Modules**                         | Private Terraform modules for VPC, EC2, ALB (non-public, stored locally).             |
+| **Custom Modules**                         | Private Terraform modules for VPC, EC2, NLB (non-public, stored locally).             |
 | **Remote State**                           | State file stored securely in an S3 bucket.                                           |
 | **Automated Provisioning**                 | Uses `remote-exec` to install Apache/proxy and `local-exec` to write IPs to a file.   |
 | **AMI Data Source**                        | Dynamically fetches the latest Ubuntu AMI ID for EC2 instances.                       |
-| **Load Balancers**                         | Public ALB for external traffic, private ALB for internal routing.                    |
+| **Load Balancers**                         | Public NLB for external traffic, private NLB for internal routing.                    |
 | **GitHub Submission**                      | Includes code, infrastructure diagrams, and required screenshots (see below).         |
 
 ---
@@ -46,18 +46,10 @@ This project automates the deployment of a scalable AWS infrastructure that incl
 ---
 
 ## 🛠️ Prerequisites
-- **Terraform v1.0+** installed.
+- **Terraform v5.0+** installed.
 - **AWS CLI** configured with valid IAM credentials.
 - IAM permissions for **EC2, VPC, S3, and NLB**.
-
 ---
-
-## 🚦 Getting Started
-
-1. **Clone the Repository**:
-   ```bash
-   git clone <your-github-uri>
-   cd <repo-directory>
 
 
 
