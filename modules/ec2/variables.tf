@@ -20,3 +20,7 @@ variable "use_bastion" {
   type    = bool
   default = false
 }
+
+variable "ec2-img" {
+
+}
