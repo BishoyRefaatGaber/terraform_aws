@@ -58,6 +58,3 @@ This project automates the deployment of a scalable AWS infrastructure that incl
 
 
 ![Screenshot from 2025-04-08 11-23-13](https://github.com/user-attachments/assets/7a3341e7-a5f2-44ef-a240-d938aa9b6db6)
-
-
-![Screenshot from 2025-04-08 11-14-34](https://github.com/user-attachments/assets/c20337c2-c3ee-468e-84de-133bdf2c99cb)
